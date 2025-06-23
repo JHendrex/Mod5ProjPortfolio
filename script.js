@@ -52,19 +52,29 @@ function resetErrors() {
     document.getElementById("email-error").textContent = "";
 }
 
-function formSearch(e) {
-    let updatedText = "";
-    const textEl = document.getElementById("text");
-    let text = textEl.textContent;
-    /*updatedText = text.replace("<mark>","");
-    updatedText = text.replace("</mark>","");*/
-    console.log(updatedText)
-    document.getElementById("text").textContent = updatedText;
-	let searched = document.getElementById("search").value.trim();
-    let newText = ""
-    if (searched !== "") {
-  	    let re = new RegExp(searched,"g"); // search for all instances {
-		    newText = text.replace(re, "<mark>$1</mark>");
-		    textEl.innerHTML = newText;
-  }
+function formSearch() {
+    const el = document.getElementById("text");
+    // 1) grab the HTML, not textContent
+    const rawHTML = el.innerHTML;
+    const query = document.getElementById("search").value.trim();
+
+    // 2) reset if empty  
+    if (!query) {  
+        // strip any old <mark>…</mark>  
+        el.innerHTML = rawHTML.replace(/<\/?mark>/gi, "");  
+        return;  
+    }
+
+    // 3) build a global, case-insensitive RegExp  
+    const re = new RegExp(query, "gi");
+
+    // 4) first strip any old <mark>  
+    const clean = rawHTML.replace(/<\/?mark>/gi, "");
+
+    // 5) replace in the HTML string  
+    //    use $& to refer to "the entire match"  
+    const highlighted = clean.replace(re, (match) => `<mark>${match}</mark>`);
+
+    // 6) write it back  
+    el.innerHTML = highlighted;
 }
