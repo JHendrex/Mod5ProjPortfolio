@@ -45,8 +45,10 @@ function validateForm() { //form validation function for the contact page
     }
 }
 
-function resetErrors() {
+function resetErrors() { //resets fields in form when called
     
+    document.getElementById("firstName").textContent = "";
+    document.getElementById("lastName").textContent = "";
     document.getElementById("userMessage-error").textContent = "";
     document.getElementById("contactReason-error").textContent = "";
     document.getElementById("email-error").textContent = "";
@@ -77,4 +79,12 @@ function formSearch() {
 
     // 6) write it back  
     el.innerHTML = highlighted;
+}
+
+
+function getRandProject () {
+    const featured = document.getElementById("featText");
+    const projects = ["Defeat the Evil Wizard","Ecommerce API","Event Center Website"];
+    const index = Math.floor(Math.random()*projects.length);
+    featured.textContent = projects[index];
 }
