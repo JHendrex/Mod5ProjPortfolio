@@ -82,7 +82,7 @@ function formSearch() {
 }
 
 
-function getRandProject () {
+function getRandProject () { //displays one project name to feature on home page
     const featured = document.getElementById("featText");
     const projects = ["Defeat the Evil Wizard","Ecommerce API","Event Center Website"];
     const index = Math.floor(Math.random()*projects.length);
