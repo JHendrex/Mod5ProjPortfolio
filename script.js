@@ -84,7 +84,7 @@ function formSearch() {
 
 function getRandProject () { //displays one project name to feature on home page
     const featured = document.getElementById("featText");
-    const projects = ["Defeat the Evil Wizard","Ecommerce API","Event Center Website"];
+    const projects = ["Defeat the Evil Wizard","Ecommerce API","Open Trivia Database Question Generator"];
     const index = Math.floor(Math.random()*projects.length);
     featured.textContent = projects[index];
 }
