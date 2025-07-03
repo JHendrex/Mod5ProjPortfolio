@@ -1,4 +1,4 @@
-function validateForm() { //form validation function for the contact page
+form.addEventListener('submit', function validateForm() { //form validation function for the contact page
     
     const firstName = document.getElementById("firstName").value;
     const lastName = document.getElementById("lastName").value;
@@ -56,18 +56,18 @@ function validateForm() { //form validation function for the contact page
     else {
         return false;
     }
-}
+});
 
-function resetErrors() { //resets fields in form when called
+form.addEventListener('reset', function resetErrors() { //resets fields in form when called
     
     document.getElementById("firstName").textContent = "";
     document.getElementById("lastName").textContent = "";
     document.getElementById("userMessage-error").textContent = "";
     document.getElementById("contactReason-error").textContent = "";
     document.getElementById("email-error").textContent = "";
-}
+});
 
-function formSearch() {
+button.addEventListener('click', function formSearch() {
     const el = document.getElementById("text");
     // 1) grab the HTML, not textContent
     const rawHTML = el.innerHTML;
@@ -92,7 +92,7 @@ function formSearch() {
 
     // 6) write it back  
     el.innerHTML = highlighted;
-}
+});
 
 
 function getRandProject () { //displays one project name to feature on home page
