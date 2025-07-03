@@ -9,7 +9,7 @@
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
         
-        <script src="script.js"></script>
+        <script src="script.js" defer></script>
 
         <!-- Bootstrap CSS v5.2.1 -->
         <link
@@ -78,8 +78,9 @@
         <main id="text" class="container border border-dark-subtle rounded p-4 bg-light">
             <div class="container border border-dark-subtle rounded p-4 mb-5 bg-white">
                 <h1 class="display-6">If you have any questions, comments, suggestions, or simply want to get in touch with me, feel free to use the form below. Thank you!</h1>
-            </div>    
+            </div>
             <form name="contactForm" id="contactForm" class="border border-dark-subtle rounded p-3 bg-secondary-subtle" onsubmit="return validateForm()" onreset="resetErrors()">
+                <input type="hidden" name="access_key" value="8da32360-cc2f-4871-896e-95b16f6f99f6"/>
                 <h2 class="col-form-legend mb-3"><strong>Contact Me</strong></h2>
                 <div class="mb-3 mt-3 row">
                     <label
@@ -161,6 +162,7 @@
                             Reset
                         </button>
                     </div>
+                    <div id="result"></div>
                 </div>
             </form>
             
