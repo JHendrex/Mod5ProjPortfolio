@@ -1,16 +1,15 @@
-    const firstName = document.getElementById("firstName").value;
-    const lastName = document.getElementById("lastName").value;
-    const email = document.getElementById("email").value;
-    const reason = document.getElementById("contactReason").value;
-    const message = document.getElementById("userMessage").value;
+function validateForm() { //form validation function for the contact page
+    const firstName = document.getElementById("firstName").value.trim();
+    const lastName = document.getElementById("lastName").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const reason = document.getElementById("contactReason").value.trim();
+    const message = document.getElementById("userMessage").value.trim();
 
     const fNameErr = document.getElementById("fName-error");
     const lNameErr = document.getElementById("lName-error");
     const emailErr = document.getElementById("email-error");
     const reasonErr = document.getElementById("contactReason-error");
     const messageErr = document.getElementById("userMessage-error");
-
-function validateForm() { //form validation function for the contact page
 
     fNameErr.textContent = "";
     lNameErr.textContent = "";
@@ -46,17 +45,47 @@ function validateForm() { //form validation function for the contact page
         isValid = false;
     }
 
+    return isValid;
+}
 
-
-
-    if (isValid) {
-        alert("Form submitted successfully!");
-        return true;
+form.addEventListener('submit', function(e) {  
+  e.preventDefault();
+  if (!validateForm()) { //if form is not valid, do not submit
+    return;
     }
-    else {
-        return false;
-    }
-};
+  const formData = new FormData(form);
+  const object = Object.fromEntries(formData);
+  const json = JSON.stringify(object);
+  result.innerHTML = "Please wait..."
+
+    fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: json
+        })
+        .then(async (response) => {
+            let json = await response.json();
+            if (response.status == 200) {
+                result.innerHTML = "Form submitted successfully";
+            } else {
+                console.log(response);
+                result.innerHTML = json.message;
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            result.innerHTML = "Something went wrong!";
+        })
+        .then(function() {
+            form.reset();
+            setTimeout(() => {
+                result.style.display = "none";
+            }, 3000);
+        });
+});
 
 form.addEventListener('reset', function resetErrors() { //resets fields in form when called
     
@@ -110,40 +139,3 @@ featured.addEventListener("load", getRandProject); //add event listener to featu
 
 const form = document.getElementById('contactForm');
 const result = document.getElementById('result');
-
-form.addEventListener('submit', function(e) {
-  validateForm(); //call the validateForm function to check if the form is valid  
-  e.preventDefault();
-  const formData = new FormData(form);
-  const object = Object.fromEntries(formData);
-  const json = JSON.stringify(object);
-  result.innerHTML = "Please wait..."
-
-    fetch('https://api.web3forms.com/submit', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: json
-        })
-        .then(async (response) => {
-            let json = await response.json();
-            if (response.status == 200) {
-                result.innerHTML = "Form submitted successfully";
-            } else {
-                console.log(response);
-                result.innerHTML = json.message;
-            }
-        })
-        .catch(error => {
-            console.log(error);
-            result.innerHTML = "Something went wrong!";
-        })
-        .then(function() {
-            form.reset();
-            setTimeout(() => {
-                result.style.display = "none";
-            }, 3000);
-        });
-});
