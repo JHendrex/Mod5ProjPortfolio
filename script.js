@@ -1,16 +1,16 @@
-const firstName = document.getElementById("firstName").value;
-const lastName = document.getElementById("lastName").value;
-const email = document.getElementById("email").value;
-const reason = document.getElementById("contactReason").value;
-const message = document.getElementById("userMessage").value;
+    const firstName = document.getElementById("firstName").value;
+    const lastName = document.getElementById("lastName").value;
+    const email = document.getElementById("email").value;
+    const reason = document.getElementById("contactReason").value;
+    const message = document.getElementById("userMessage").value;
 
-const fNameErr = document.getElementById("fName-error");
-const lNameErr = document.getElementById("lName-error");
-const emailErr = document.getElementById("email-error");
-const reasonErr = document.getElementById("contactReason-error");
-const messageErr = document.getElementById("userMessage-error");
+    const fNameErr = document.getElementById("fName-error");
+    const lNameErr = document.getElementById("lName-error");
+    const emailErr = document.getElementById("email-error");
+    const reasonErr = document.getElementById("contactReason-error");
+    const messageErr = document.getElementById("userMessage-error");
 
-form.addEventListener('submit', function validateForm() { //form validation function for the contact page
+function validateForm() { //form validation function for the contact page
 
     fNameErr.textContent = "";
     lNameErr.textContent = "";
@@ -56,22 +56,23 @@ form.addEventListener('submit', function validateForm() { //form validation func
     else {
         return false;
     }
-});
+};
 
 form.addEventListener('reset', function resetErrors() { //resets fields in form when called
     
-    document.getElementById("firstName").textContent = "";
-    document.getElementById("lastName").textContent = "";
-    document.getElementById("userMessage-error").textContent = "";
-    document.getElementById("contactReason-error").textContent = "";
-    document.getElementById("email-error").textContent = "";
+    fNameErr.textContent = "";
+    lNameErr.textContent = "";
+    emailErr.textContent = "";
+    reasonErr.textContent = "";
+    messageErr.textContent = "";
 });
 
+const sButton = document.getElementById("searchButton");
 const el = document.getElementById("text");
 // 1) grab the HTML, not textContent
 const rawHTML = el.innerHTML;
 
-button.addEventListener('click', function formSearch() {
+function formSearch() {
 
     const query = document.getElementById("search").value.trim();
 
@@ -94,7 +95,8 @@ button.addEventListener('click', function formSearch() {
 
     // 6) write it back  
     el.innerHTML = highlighted;
-});
+};
+sButton.addEventListener("click", formSearch); //add event listener to search button
 
 const featured = document.getElementById("featText");
 const projects = ["Defeat the Evil Wizard","Ecommerce API","Open Trivia Database Question Generator"];
@@ -103,11 +105,14 @@ function getRandProject () { //displays one project name to feature on home page
     const index = Math.floor(Math.random()*projects.length);
     featured.textContent = projects[index];
 }
+featured.addEventListener("load", getRandProject); //add event listener to featured text
+
 
 const form = document.getElementById('contactForm');
 const result = document.getElementById('result');
 
 form.addEventListener('submit', function(e) {
+  validateForm(); //call the validateForm function to check if the form is valid  
   e.preventDefault();
   const formData = new FormData(form);
   const object = Object.fromEntries(formData);
