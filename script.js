@@ -1,15 +1,19 @@
 function validateForm() { //form validation function for the contact page
     
+    const firstName = document.getElementById("firstName").value;
+    const lastName = document.getElementById("lastName").value;
     const email = document.getElementById("email").value;
     const reason = document.getElementById("contactReason").value;
     const message = document.getElementById("userMessage").value;
 
-    
+    const fNameErr = document.getElementById("fName-error");
+    const lNameErr = document.getElementById("lName-error");
     const emailErr = document.getElementById("email-error");
     const reasonErr = document.getElementById("contactReason-error");
     const messageErr = document.getElementById("userMessage-error");
 
-    
+    fNameErr.textContent = "";
+    lNameErr.textContent = "";
     emailErr.textContent = "";
     reasonErr.textContent = "";
     messageErr.textContent = "";
@@ -17,6 +21,15 @@ function validateForm() { //form validation function for the contact page
     let isValid = true;
 
 
+    if (firstName === "") {
+        fNameErr.textContent = "Please enter your first name.";
+        isValid = false;
+    }
+
+    if (lastName === "") {
+        lNameErr.textContent = "Please enter your last name.";
+        isValid = false;
+    }
 
     if (email === "" || !email.includes("@") || !email.includes(".")) {
         emailErr.textContent = "Please enter a valid email address.";
