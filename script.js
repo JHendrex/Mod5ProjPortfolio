@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function() { //ensures the DOM is 
     //Only run this on Home.html
     const featured = document.getElementById("featText");
     if (featured) {
-        const projects = ["Defeat the Evil Wizard","Ecommerce API","Open Trivia Database Question Generator"];
+        const projects = ["Defeat the Evil Wizard","Mechanic API","Open Trivia Database Question Generator", "Fakestore API", "Event Center Website"];
         function getRandProject () { //displays one project name to feature on home page
             const index = Math.floor(Math.random() * projects.length);
             featured.textContent = projects[index];
